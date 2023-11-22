@@ -1,0 +1,53 @@
+-- Music Store Database
+-- Create a specialty store database and use select statements to order the items by price and display a few statistics.
+
+
+-- Create a Music Store Database, containing all 15 items in the store, with 5 columns for data.
+
+CREATE TABLE Music_Store (id INTEGER PRIMARY KEY, Instrument TEXT, quantity INTEGER, price NUMERIC, units_sold INTEGER); 
+
+INSERT into Music_Store VALUES (1, "flute", 35, 635, 27); 
+INSERT into Music_Store VALUES (2, "trumpet", 35, 858, 25);
+INSERT into Music_Store VALUES (3, "trombone", 20, 1577, 15);
+INSERT into Music_Store VALUES (4, "tuba", 5, 7105, 2);
+INSERT into Music_Store VALUES (5, "piano", 5, 5990, 6);
+INSERT into Music_Store VALUES (6, "xylophone", 7, 1299, 2);
+INSERT into Music_Store VALUES (7, "clarinet", 50, 788, 43);
+INSERT into Music_Store VALUES (8, "saxaphone", 40, 2829, 39);
+INSERT into Music_Store VALUES (9, "bassoon", 3, 4375, 1);
+INSERT into Music_Store VALUES (10, "drums", 3, 1025, 3);
+INSERT into Music_Store VALUES (11, "cello", 3, 757, 2);
+INSERT into Music_Store VALUES (12, "guitar", 45, 1099, 15);
+INSERT into Music_Store VALUES (13, "violin", 20, 1255, 17);
+INSERT into Music_Store VALUES (14, "french horn", 15, 1305, 9);
+INSERT into Music_Store VALUES (15, "harp", 2, 2990, 0);
+
+-- Order store items by price.
+SELECT * FROM Music_Store ORDER BY price DESC; 
+
+-- Display the quantity of total inventory the store started with, the quantity sold, and the quantity of inventory left after. 
+SELECT SUM(quantity) AS StartQuantity, SUM (units_sold) AS QuantitySold, SUM(quantity-units_sold) AS QuantityLeft 
+  FROM Music_Store;
+
+-- Display the revenue of the store.
+SELECT SUM(units_sold * price) AS Revenue_$ 
+  FROM Music_Store; 
+
+-- What instrument sold the most?
+SELECT instrument AS MostSold, MAX(units_sold) AS units_sold 
+  FROM Music_Store;
+
+-- What instrument sold the least?
+SELECT instrument AS LeastSold, MIN(units_sold) AS units_sold 
+  FROM Music_Store;
+
+Which were the lowest five instruments that the store sold?
+SELECT instrument, units_sold 
+  FROM Music_Store 
+  ORDER BY units_sold ASC 
+  LIMIT 5; 
+
+
+
+
+
