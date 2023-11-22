@@ -13,7 +13,7 @@ INSERT into Music_Store VALUES (4, "tuba", 5, 7105, 2);
 INSERT into Music_Store VALUES (5, "piano", 5, 5990, 6);
 INSERT into Music_Store VALUES (6, "xylophone", 7, 1299, 2);
 INSERT into Music_Store VALUES (7, "clarinet", 50, 788, 43);
-INSERT into Music_Store VALUES (8, "saxaphone", 40, 2829, 39);
+INSERT into Music_Store VALUES (8, "saxophone", 40, 2829, 39);
 INSERT into Music_Store VALUES (9, "bassoon", 3, 4375, 1);
 INSERT into Music_Store VALUES (10, "drums", 3, 1025, 3);
 INSERT into Music_Store VALUES (11, "cello", 3, 757, 2);
