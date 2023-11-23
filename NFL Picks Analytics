@@ -1,0 +1,49 @@
+--Database Source: [https://github.com/kevyoung1214/SQL/blob/main/Marvel%20Analytics](https://github.com/kevyoung1214/SQL/blob/main/Marvel%20Analytics)
+
+-- view database	
+SELECT * FROM picks;
+
+-- how many players has each team picked?
+SELECT COUNT(name) AS PlayersPicked, picked_by 
+  FROM picks 
+  GROUP BY picked_by 
+  ORDER BY COUNT(name) DESC; 
+
+-- how many picks for each position?
+SELECT position, count(*) AS PositionCount 
+  FROM picks 
+  GROUP BY position 
+  ORDER BY count(*) DESC; 
+
+-- What were the top 5 positions with the most amount of players picked? 
+SELECT position, count(*) AS PositionCount 
+  FROM picks 
+  GROUP BY position 
+  ORDER BY count(*) desc 
+  LIMIT 5; 
+
+-- what were the top 3 colleges with the most players picked? 
+SELECT COUNT(name) AS PlayersPicked, college 
+  FROM picks 
+  GROUP BY college 
+  ORDER BY COUNT(name) DESC 
+  LIMIT 3;
+
+-- which schools were QB picked from and what teams were they picked by?
+SELECT name, position, college 
+  FROM picks 
+  WHERE position = 'QB';
+
+-- what teams had the most picks?
+SELECT picked_by, COUNT(picked_by) AS PicksCount 
+  FROM picks 
+  GROUP BY picked_by 
+  ORDER BY PicksCount DESC 
+  LIMIT 2; 
+
+--what college had 4 or more picks?
+SELECT college, count(*) 
+  FROM picks 
+  GROUP BY college 
+  HAVING COUNT(*) >= 4 
+  ORDER BY count(*) DESC;
