@@ -1,0 +1,52 @@
+/* Create table about the people and what they do here */
+
+CREATE TABLE FamousScientists (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT, last_name TEXT, country TEXT, BirthYear INTEGER, DeathYear INTEGER); 
+
+INSERT INTO FamousScientists VALUES ("1", "Albert", "Einstein", "Germany", "1879", "1955");
+INSERT INTO FamousScientists VALUES ("2","Marie", "Curie", "Poland", "1867", "1934");
+INSERT INTO FamousScientists VALUES ("3","Isaac", "Newton", "United Kingdom", "1642", "1727");
+INSERT INTO FamousScientists VALUES ("4","Charles", "Darwin", "United Kingdom", "1809", "1882");
+INSERT INTO FamousScientists VALUES ("5","Galileo", "Galilei", "Italy", "1564","1642");
+INSERT INTO FamousScientists VALUES ("6","Stephen", "Hawking", "United Kingdom", "1942", "2018");
+INSERT INTO FamousScientists VALUES ("7","Niels", "Bohr", "Denmark", "1885", "1962");
+INSERT INTO FamousScientists VALUES ("8","Rosalind", "Franklin", "United Kingdom", "1920", "1958");
+INSERT INTO FamousScientists VALUES ("9","Jane", "Goodall", "United Kingdom", "1934", NULL);
+INSERT INTO FamousScientists VALUES ("10","Richard", "Feynman", "USA", "1918", "1988");
+INSERT INTO FamousScientists VALUES ("11","Alexander", "Fleming", "United Kingdom","1881", "1955"); 
+INSERT INTO FamousScientists VALUES ("12","Max", "Planck", "Germany", "1858", "1947");
+INSERT INTO FamousScientists VALUES ("13","Ada", "Lovelace", "United Kingdom", "1815", "1852");
+INSERT INTO FamousScientists VALUES ("14","Erwin", "Schrödinger", "Austria", "1887", "1961");
+INSERT INTO FamousScientists VALUES ("15","James", "Maxwell", "United Kingdom", "1831", "1879");
+INSERT INTO FamousScientists VALUES ("16","Barbara", "McClintock", "USA", "1902", "1992");
+INSERT INTO FamousScientists VALUES ("17","Alan", "Turing", "United Kingdom", "1912", "1954");
+INSERT INTO FamousScientists VALUES ("18","Francis", "Crick", "United Kingdom", "1916", "2004");
+INSERT INTO FamousScientists VALUES ("19","James", "Watson", "USA", "1928", NULL);
+INSERT INTO FamousScientists VALUES ("20","Rachel", "Carson", "USA", "1907", "1964");
+
+
+CREATE TABLE FamousContributions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Field TEXT, Contributions TEXT); 
+
+INSERT INTO FamousContributions VALUES ("1", "Physics","Theory of Relativity");
+INSERT INTO FamousContributions VALUES ("2", "Physics/ Chemistry", "Radioactivity research");
+INSERT INTO FamousContributions VALUES ("3", "Physics/ Mathematics", "laws of motion and gravity");
+INSERT INTO FamousContributions VALUES ("4", "Biology", "the theory of evolution"); 
+INSERT INTO FamousContributions VALUES ("5", "Physics/ Astronomy", "Telescopic observational discoveries");
+INSERT INTO FamousContributions VALUES ("6", "Physics/ Cosmology", "Black holes and relitivity?? ");
+INSERT INTO FamousContributions VALUES ("7", "Physics", "Bohr model of the atom");
+INSERT INTO FamousContributions VALUES ("8", "Chemistry/ Molecular Biology","X-ray diffraction studies of DNA, RNA, etc.");
+INSERT INTO FamousContributions VALUES ("9", "Primatology", "long-term study of wild chipanzees");
+INSERT INTO FamousContributions VALUES ("10","Physics", "contributed to quantum mechanics"); 
+INSERT INTO FamousContributions VALUES ("11","Microbiology", "discovered penicillin");
+INSERT INTO FamousContributions VALUES ("12","Physics", "quantum theory");
+INSERT INTO FamousContributions VALUES ("13", "Mathematics/ Computer Science", "first computer programmer??");
+INSERT INTO FamousContributions VALUES ("14", "Physics", "Schrödinger Equation and contributed to quantum mechanics");"
+INSERT INTO FamousContributions VALUES ("15", "Physics", "Maxwell's Equations");
+INSERT INTO FamousContributions VALUES ("16", "Genetics", "discovered transposons");
+INSERT INTO FamousContributions VALUES ("17", "Mathematics/ Computer Science", "Turing Machine and for broke the Enigma code");
+INSERT INTO FamousContributions VALUES ("18", "Molecular Biology", "Co-discovery of DNA structure");
+INSERT INTO FamousContributions VALUES ("19", "Molecular Biology", "Co-discovery of DNA structure");
+INSERT INTO FamousContributions VALUES ("20", "Marine Biology Conservation", "Silent Spring"); 
