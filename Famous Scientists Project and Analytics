@@ -1,8 +1,8 @@
-/* Create table about the people and what they do here */
+/* I have chosen to create a databse about a random set of famous scientists and their contributions, utilizing the web for general information about their life and works. */
 
 CREATE TABLE FamousScientists (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    FirstName TEXT, LastName TEXT, country TEXT, BirthYear INTEGER, DeathYear INTEGER); 
+    FirstName TEXT, LastName TEXT, Country TEXT, BirthYear INTEGER, DeathYear INTEGER); 
 
 INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("1", "Albert", "Einstein", "Germany", "1879", "1955");
 INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("2","Marie", "Curie", "Poland", "1867", "1934");
@@ -14,11 +14,11 @@ INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, Death
 INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("8","Rosalind", "Franklin", "United Kingdom", "1920", "1958");
 INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("9","Jane", "Goodall", "United Kingdom", "1934", NULL);
 INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("10","Richard", "Feynman", "USA", "1918", "1988");
-INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("11","Alexander", "Fleming", "United Kingdom","1881", "1955"); 
+INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("11","Alexander", "Fleming", "Scottland","1881", "1955"); 
 INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("12","Max", "Planck", "Germany", "1858", "1947");
 INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("13","Ada", "Lovelace", "United Kingdom", "1815", "1852");
 INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("14","Erwin", "Schrödinger", "Austria", "1887", "1961");
-INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("15","James", "Maxwell", "United Kingdom", "1831", "1879");
+INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("15","James", "Maxwell", "Scotland", "1831", "1879");
 INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("16","Barbara", "McClintock", "USA", "1902", "1992");
 INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("17","Alan", "Turing", "United Kingdom", "1912", "1954");
 INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("18","Francis", "Crick", "United Kingdom", "1916", "2004");
@@ -26,7 +26,7 @@ INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, Death
 INSERT INTO FamousScientists (id, FirstName, LastName, country, BirthYear, DeathYear) VALUES ("20","Rachel", "Carson", "USA", "1907", "1964");
 
 
-CREATE TABLE FamousContributions (
+CREATE TABLE Contributions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     Field TEXT, Contributions TEXT); 
 
@@ -36,17 +36,67 @@ INSERT INTO Contributions (id, Field, Contributions) VALUES (3, "Physics/ Mathem
 INSERT INTO Contributions (id, Field, Contributions) VALUES (4, "Biology", "The Theory of Evolution"); 
 INSERT INTO Contributions (id, Field, Contributions) VALUES (5, "Physics/ Astronomy", "the 'father of modern science' and telescopic observational discoveries");
 INSERT INTO Contributions (id, Field, Contributions) VALUES (6, "Physics/ Cosmology", "black holes, relitivity, and the origins of the universe");
-INSERT INTO Contributions (id, Field, Contributions) VALUES (7, "Physics", "Bohr model of the atom");
+INSERT INTO Contributions (id, Field, Contributions) VALUES (7, "Physics", "Bohr model of the atom, atomic structure and quantum theory");
 INSERT INTO Contributions (id, Field, Contributions) VALUES (8, "Chemistry/ Molecular Biology","X-ray diffraction studies of DNA, RNA, etc.");
 INSERT INTO Contributions (id, Field, Contributions) VALUES (9, "Primatology", "long-term study of wild chipanzees");
-INSERT INTO Contributions (id, Field, Contributions) VALUES (10,"Physics", "contributed to quantum mechanics"); 
+INSERT INTO Contributions (id, Field, Contributions) VALUES (10,"Physics", "contributed to quantum electrodynamics"); 
 INSERT INTO Contributions (id, Field, Contributions) VALUES (11,"Microbiology", "discovered penicillin");
 INSERT INTO Contributions (id, Field, Contributions) VALUES (12,"Physics", "quantum theory");
-INSERT INTO Contributions (id, Field, Contributions) VALUES (13, "Mathematics/ Computer Science", "first computer programmer??");
+INSERT INTO Contributions (id, Field, Contributions) VALUES (13, "Mathematics/ Computer Science", "'the first programmer' after recognizing machines could follow instructions");
 INSERT INTO Contributions (id, Field, Contributions) VALUES (14, "Physics", "Schrödinger Equation and contributed to quantum mechanics"); 
-INSERT INTO Contributions (id, Field, Contributions) VALUES (15, "Physics", "Maxwell's Equations");
+INSERT INTO Contributions (id, Field, Contributions) VALUES (15, "Physics", "Maxwell's Equations contributing to electromagnetic theory");
 INSERT INTO Contributions (id, Field, Contributions) VALUES (16, "Genetics", "discovered transposons");
-INSERT INTO Contributions (id, Field, Contributions) VALUES (17, "Mathematics/ Computer Science", "Turing Machine and for broke the Enigma code");
+INSERT INTO Contributions (id, Field, Contributions) VALUES (17, "Mathematics/ Computer Science", "Turing Machine, decoding German Enigma machines, the Turning Test");
 INSERT INTO Contributions (id, Field, Contributions) VALUES (18, "Molecular Biology", "Co-discovery of DNA structure");
 INSERT INTO Contributions (id, Field, Contributions) VALUES (19, "Molecular Biology", "Co-discovery of DNA structure");
-INSERT INTO Contributions (id, Field, Contributions) VALUES (20, "Marine Biology", "Silent Spring"); 
+INSERT INTO Contributions (id, Field, Contributions) VALUES (20, "Marine Biology", "'Silent Spring' influenced the enviornmental movement"); 
+
+-- Let's see both the tables we just created.
+SELECT * FROM FamousScientists;
+SELECT * FROM Contributions;
+
+--Join both tables to show first and last names, field of study, and contributions of this entire list of scientists.
+SELECT F.FirstName, F.LastName, C.Field, C.Contributions 
+    From FamousScientists F 
+    JOIN  Contributions C 
+    ON F.id = C.id;
+
+--Join both tables to show first and last names, field of study, and contributions of scientists under the field of MOLECULAR BIOLOGY.
+SELECT F.FirstName, F.LastName, C.Field, C.Contributions 
+    From FamousScientists F 
+    JOIN  Contributions C 
+    ON F.id = C.id 
+    WHERE C.Field LIKE '%Molecular Biology%';
+
+-- Join to find the full name (Oracle syntax) of scientists who's birth country is the UK AND whose field of study was either Physics or Mathematics
+SELECT F.FirstName || ' ' || F.LastName AS FullName, F.Country, C.Field 
+    From FamousScientists F 
+    JOIN  Contributions C 
+    ON F.id = C.id 
+    WHERE F.Country LIKE '%United Kingdom%' AND C.Field LIKE '%Physics%' OR C.Field LIKE '%Math%'; 
+
+-- Join to find the full name of scientists who contributed to the study of quantum mechanics, according to this database.
+SELECT F.FirstName || ' ' || F.LastName AS FullName, C.Contributions 
+    From FamousScientists F 
+    JOIN  Contributions C ON F.id = C.id 
+    WHERE Contributions LIKE '%Quantum%'; 
+
+-- Which of these scientists lived through the scientific revolution (roughly lived between 1500-1750) and what were their contributions?
+SELECT F.FirstName || ' ' || F.LastName AS FullName, F.BirthYear ||'-'|| F.DeathYear AS LifeSpan, C.Contributions 
+    From FamousScientists F 
+    JOIN  Contributions C 
+    ON F.id = C.id 
+    WHERE F.BirthYear > 1500 AND F.DeathYear <1750; 
+
+-- Which of these scientists lived through the industrial revolution (roughly lived somewhere between 1750-1900) and what were their contributions?
+SELECT F.FirstName || ' ' || F.LastName AS FullName, F.BirthYear ||'-'|| F.DeathYear AS LifeSpan, C.Contributions 
+    From FamousScientists F 
+    JOIN  Contributions C 
+    ON F.id = C.id 
+    WHERE F.BirthYear > 1750 AND F.DeathYear <1900; 
+
+--Join all the columns of both tables, where the field is MOLECULAR BIOLOGY.
+SELECT * From FamousScientists F 
+    JOIN  Contributions C 
+    ON F.id = C.id 
+    WHERE C.Field LIKE '%Molecular Biology%';
