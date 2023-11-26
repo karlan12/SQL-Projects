@@ -1,0 +1,110 @@
+# For this project I downloaded data from [Kaggle.](https://www.kaggle.com/datasets/rajkumarpandey02/electric-vehicle-population-data/data)
+# I explored the .csv data through Excel. 
+# Then uploaded the .xlsx file into Microsoft SQL to explore using the following queries. 
+
+
+-- 1. Let's check the entire database. 
+SELECT * FROM dbo.Electric_Vehicle_Population_Dat$;
+
+-- 2. How many rows are there? This will be equivalent to the population of electric vehicles registered with the Washington State Department of Liscensing. 
+-- Ans: 135038
+SELECT COUNT(*) FROM dbo.Electric_Vehicle_Population_Dat$;
+
+-- 3. Let's confirm that there are no VIN duplicates by counting distinct VIN's. This number should match the previous. 
+-- Ans. 135038
+SELECT DISTINCT COUNT([VIN (1-10)]) FROM dbo.Electric_Vehicle_Population_Dat$;
+
+-- 4. Now, there are some electric vehicles registered with WA state, but the vehicle's owners might reside outside of the state. 
+-- What is the population of electric vehicles that are potentially located in a different state? 
+-- Ans. 312
+SELECT COUNT(state) AS VehiclesInOtherStates	
+	FROM dbo.Electric_Vehicle_Population_Dat$ WHERE state != 'WA'; 
+
+-- 5. Now, I'm curious to know how many electric vehicles are potentialy residing in each state. 
+-- Ans. WA = 134726, CA = 90, VA = 33, etc. 
+SELECT state, COUNT(*) AS VEHICLECOUNT 
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+	GROUP BY State 
+	ORDER BY VEHICLECOUNT desc;
+
+-- 6. What is the average electric range of this population? I have excluded range values being zero, under the assumption that this is missing data. 
+-- ANS. 129.0475 
+SELECT AVG([electric range]) AS AverageElectricRange 
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+	WHERE [Electric Range] !=0;
+
+-- 7. What is the average range by make? I have excluded range values being zero, assuming it is missing data. 
+-- Ans. Tesla 240.4864, Jaguar 234, Polestar 233, Chevy 127.6198, etc. 
+SELECT Make, Count(Make) AS Count, AVG([electric range]) AS AverageElectricRange
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+	WHERE [Electric Range] !=0 GROUP BY Make
+		ORDER BY AverageElectricRange desc;
+
+-- 8. Previously, I had excluded range values that contained zero, assuming it wass missing data. How many vehicles were not accounted for in calculating average range? 
+-- ANS. 56983
+SELECT count([electric range]) AS amount_of_missing_range_values  
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+	WHERE [Electric Range] = 0;
+
+-- 9. What was the maximum electric range? What vehicle? 
+-- Ans. 2020 Tesla Model S at 337.
+SELECT TOP 1 [Model Year], Make, Model, MAX([electric range]) AS MAX_ElectricRange 
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+	GROUP BY Make, model, [Model Year] 
+	ORDER BY MAX([electric range]) DESC; 
+
+-- 10. What was the minimum electric range? What vehicle? 
+-- Ans. 2012 Toyota Pruis Plug-in at 6.
+SELECT TOP 1 [Model Year], Make, Model, MIN([electric range]) AS MIN_ElectricRange 
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+	WHERE [Electric Range] !=0 
+	GROUP BY Make, model, [Model Year] 
+	ORDER BY MIN([electric range]) ASC;
+
+-- 11. Can you find the same min and max values, with a single query? Yes!
+SELECT 
+	MAX([electric range]) AS MAX_ElectricRange,
+	MIN([electric range]) AS MIN_ElectricRange
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+	WHERE [Electric Range] !=0 ;
+
+
+
+-- 12. Let's explore the Clean Alternative Fuel Vehicle (CAFV) eligibility column. Lets use three queries to determine how many of these electric vehicle's are CAFV eligible, not eligible, or unknown because battery range hasn't been researched.
+-- ANS. 56983 Eligible, 16834 Not Eligible, 61221 Unknown Eligibility. 
+SELECT count([VIN (1-10)]) AS CAFVeligible from dbo.Electric_Vehicle_Population_Dat$ WHERE [Clean Alternative Fuel Vehicle (CAFV) Eligibility] LIKE '%Vehicle Eligible%';
+SELECT count([VIN (1-10)]) AS NOTCAFVeligible from dbo.Electric_Vehicle_Population_Dat$ WHERE [Clean Alternative Fuel Vehicle (CAFV) Eligibility] LIKE '%Not Eligible%';
+SELECT count([VIN (1-10)]) AS unknownCAFVeligible from dbo.Electric_Vehicle_Population_Dat$ WHERE [Clean Alternative Fuel Vehicle (CAFV) Eligibility] LIKE '%unknown%';
+
+-- 13. Let's retry the previous query as a single query to determine the amounts in the three categories of elegibile, not eligible, and unknown.
+-- ANS. 56983 Eligible, 16834 Not Eligible, 61221 Unknown Eligibility. 
+SELECT [Clean Alternative Fuel Vehicle (CAFV) Eligibility], COUNT([Clean Alternative Fuel Vehicle (CAFV) Eligibility]) AS Amounts
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+		WHERE [Clean Alternative Fuel Vehicle (CAFV) Eligibility] LIKE '%Vehicle Eligible%'
+			GROUP BY [Clean Alternative Fuel Vehicle (CAFV) Eligibility];
+SELECT [Clean Alternative Fuel Vehicle (CAFV) Eligibility], COUNT([Clean Alternative Fuel Vehicle (CAFV) Eligibility]) AS Amounts
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+		WHERE [Clean Alternative Fuel Vehicle (CAFV) Eligibility] LIKE '%Not Eligible%'
+			GROUP BY [Clean Alternative Fuel Vehicle (CAFV) Eligibility];
+SELECT [Clean Alternative Fuel Vehicle (CAFV) Eligibility], COUNT([Clean Alternative Fuel Vehicle (CAFV) Eligibility]) AS Amounts
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+		WHERE [Clean Alternative Fuel Vehicle (CAFV) Eligibility] LIKE '%Unknown%'
+			GROUP BY [Clean Alternative Fuel Vehicle (CAFV) Eligibility];
+
+-- 14. Let's retry, and find the amounts for the three categories, with a simpler query.
+-- ANS. 56983 Eligible, 16834 Not Eligible, 61221 Unknown Eligibility. All three queries matched. 
+SELECT [Clean Alternative Fuel Vehicle (CAFV) Eligibility], COUNT(*) AS Amounts
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+		WHERE 
+		[Clean Alternative Fuel Vehicle (CAFV) Eligibility] LIKE '%Vehicle Eligible%'
+		OR [Clean Alternative Fuel Vehicle (CAFV) Eligibility] LIKE '%Not Eligible%' 
+		OR [Clean Alternative Fuel Vehicle (CAFV) Eligibility] LIKE '%unknown%'
+	GROUP BY [Clean Alternative Fuel Vehicle (CAFV) Eligibility]; 
+
+-- 15. How many vehicles are Battery-Electric Vehicles (BEV) vs Plug-in Hybrid Electric Vehicles?
+-- 16. What's the geographic distribution by county? 
+-- 17. group by models. 
+
+
+
+-- 56983 out of the total 135038 (42%) of electric vehicles registered through the Washington State Department of Licensing (DOL) are Clean Alternative Fuel Vehicle Eligible. 
