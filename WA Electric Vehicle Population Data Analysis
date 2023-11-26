@@ -27,7 +27,7 @@ SELECT state, COUNT(*) AS VEHICLECOUNT
 	GROUP BY State 
 	ORDER BY VEHICLECOUNT desc;
 
--- 6. What is the average electric range of this population? I have excluded range values being zero, under the assumption that this is missing data. 
+-- 6. What is the average electric range of this dataset's population? I have excluded range values being zero, under the assumption that this is missing data. 
 -- ANS. 129.0475 
 SELECT AVG([electric range]) AS AverageElectricRange 
 	FROM dbo.Electric_Vehicle_Population_Dat$ 
@@ -102,9 +102,17 @@ SELECT [Clean Alternative Fuel Vehicle (CAFV) Eligibility], COUNT(*) AS Amounts
 	GROUP BY [Clean Alternative Fuel Vehicle (CAFV) Eligibility]; 
 
 -- 15. How many vehicles are Battery-Electric Vehicles (BEV) vs Plug-in Hybrid Electric Vehicles?
+SELECT [Electric Vehicle Type], COUNT(*) AS BEV
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+		WHERE 
+		[Electric Vehicle Type] LIKE '%BEV%'
+		OR [Electric Vehicle Type] LIKE '%PHEV%' 
+	GROUP BY [Electric Vehicle Type]; 
+
 -- 16. What's the geographic distribution by county? 
--- 17. group by models. 
-
-
+SELECT county, COUNT(*) AS VEHICLECOUNT 
+	FROM dbo.Electric_Vehicle_Population_Dat$ 
+	GROUP BY county 
+	ORDER BY VEHICLECOUNT desc;
 
 -- 56983 out of the total 135038 (42%) of electric vehicles registered through the Washington State Department of Licensing (DOL) are Clean Alternative Fuel Vehicle Eligible. 
