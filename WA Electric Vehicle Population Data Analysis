@@ -1,7 +1,9 @@
-# For this project I downloaded data from [Kaggle.](https://www.kaggle.com/datasets/rajkumarpandey02/electric-vehicle-population-data/data)
+# For this project I downloaded data from Kaggle. (https://www.kaggle.com/datasets/rajkumarpandey02/electric-vehicle-population-data/data)
 # I explored the .csv data through Excel. 
 # Then uploaded the .xlsx file into Microsoft SQL to explore using the following queries. 
-# I completed this project with a visualization of this data in Tableau.
+# I completed this project with a visualization of this data in Tableau. Available at this link: https://public.tableau.com/app/profile/karla.n7563
+
+
 
 -- 1. Let's check the entire database. 
 SELECT * FROM dbo.Electric_Vehicle_Population_Dat$;
